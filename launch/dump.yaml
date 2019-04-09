@@ -1,0 +1,10 @@
+rosdistro: 'kinetic
+
+  '
+roslaunch:
+  uris: {host_192_168_7_1__45619: 'http://192.168.7.1:45619/'}
+rosversion: '1.12.14
+
+  '
+run_id: 28155f9c-577f-11e9-8505-5800e3ffdd65
+timeout: 3
