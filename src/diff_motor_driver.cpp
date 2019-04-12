@@ -101,8 +101,6 @@ int main(int argc, char** argv)
         ros::spinOnce();
 
         //Motor is stopped when no message is received within the timeout value
-	ROS_INFO ("%d                  %d",ros::Time::now().toSec(),msg_received.toSec());
-
         if (g_driving && (ros::Time::now().toSec() - msg_received.toSec()) > sub_timeout)
         {
             ROS_INFO("TIMEOUT: No wheel_vel received: Setting the motor to 0");
