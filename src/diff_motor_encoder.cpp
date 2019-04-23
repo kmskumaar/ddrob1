@@ -12,24 +12,34 @@
 int g_left_encoder;      // param default 1
 int g_right_encoder;     // param default 2
 
-ros::Time old_timestamp;
+ros::Time g_old_timestamp;
 
-double wheelRPS[2];
+double g_wheelRPS[4];
+
+int g_old_encoder[2];
 
 
 void calculateRPS(){
 
-	for (int i=0;i<sizeof(wheelRPS);i++){
-		wheelRPS[i]=0.0;
-	}
-	if (old_timestamp){
-		wheelRPS[g_left_encoder-1]= rc_encoder_eqep_read(g_left_encoder)/(ros::Time::now().toSec()-old_timestamp.toSec());
-		wheelRPS[g_right_encoder-1]= rc_encoder_eqep_read(g_right_encoder)/(ros::Time::now().toSec()-old_timestamp.toSec());
+	for (int i=0;i<sizeof(g_wheelRPS);i++){
+		g_wheelRPS[i]=0.0;
 	}
 
-	rc_encoder_eqep_write(g_left_encoder,0);
-	rc_encoder_eqep_write(g_right_encoder,0);
-	old_timestamp = ros::Time::now();
+	g_wheelRPS[g_left_encoder-1]= (rc_encoder_eqep_read(g_left_encoder)-g_old_encoder[g_left_encoder-1])/(ros::Time::now().toSec()-g_old_timestamp.toSec());
+	g_wheelRPS[g_right_encoder-1]= (rc_encoder_eqep_read(g_right_encoder)-g_old_encoder[g_right_encoder-1])/(ros::Time::now().toSec()-g_old_timestamp.toSec());
+
+	g_old_encoder[g_left_encoder-1] = rc_encoder_eqep_read(g_left_encoder-1);
+	g_old_encoder[g_right_encoder-1] = rc_encoder_eqep_read(g_right_encoder-1);
+
+	if(g_wheelRPS[g_left_encoder-1]>0.0){
+		g_wheelRPS[g_left_encoder+1]=1.0;
+	}
+
+	if(g_wheelRPS[g_right_encoder-1]>0.0){
+			g_wheelRPS[g_right_encoder+1]=1.0;
+	}
+
+	g_old_timestamp = ros::Time::now();
 }
 
 
@@ -40,6 +50,10 @@ int main (int argc, char **argv){
 
 	ros::param::param("~left_encoder", g_left_encoder, 1);
 	ros::param::param("~right_encoder", g_right_encoder, 2);
+
+	for (int i=0;i<sizeof(g_old_encoder);i++){
+		g_old_encoder[i]=0;
+		}
 
 	if (rc_encoder_eqep_init())
 	    {
@@ -56,13 +70,15 @@ int main (int argc, char **argv){
 	while(ros::ok())
 	    {
 			calculateRPS();
+
+			ROS_INFO("Left Wheel RPS: %f(%f),     Right Wheel RPS: %f(%f)",g_wheelRPS[0],g_wheelRPS[2],g_wheelRPS[1],g_wheelRPS[3]);
 	        std_msgs::Float64MultiArray rps;
 
 	        rps.data.clear();
 
-	        for(int i=0;i<2;i++)
+	        for(int i=0;i<sizeof(g_wheelRPS);i++)
 	        {
-	            rps.data.push_back(wheelRPS[i]);
+	            rps.data.push_back(g_wheelRPS[i]);
 	        }
 
 	        rps_pub.publish(rps);
@@ -73,4 +89,3 @@ int main (int argc, char **argv){
 	return 0;
 
 }
-
