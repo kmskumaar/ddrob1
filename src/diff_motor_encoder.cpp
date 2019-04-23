@@ -28,8 +28,8 @@ void calculateRPS(){
 	g_wheelRPS[g_left_encoder-1]= (rc_encoder_eqep_read(g_left_encoder)-g_old_encoder[g_left_encoder-1])/(ros::Time::now().toSec()-g_old_timestamp.toSec());
 	g_wheelRPS[g_right_encoder-1]= (rc_encoder_eqep_read(g_right_encoder)-g_old_encoder[g_right_encoder-1])/(ros::Time::now().toSec()-g_old_timestamp.toSec());
 
-	g_old_encoder[g_left_encoder-1] = rc_encoder_eqep_read(g_left_encoder-1);
-	g_old_encoder[g_right_encoder-1] = rc_encoder_eqep_read(g_right_encoder-1);
+	g_old_encoder[g_left_encoder-1] = rc_encoder_eqep_read(g_left_encoder);
+	g_old_encoder[g_right_encoder-1] = rc_encoder_eqep_read(g_right_encoder);
 
 	if(g_wheelRPS[g_left_encoder-1]>0.0){
 		g_wheelRPS[g_left_encoder+1]=1.0;
