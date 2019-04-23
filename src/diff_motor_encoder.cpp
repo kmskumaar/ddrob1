@@ -21,7 +21,7 @@ int g_old_encoder[2];
 
 void calculateRPS(){
 
-	for (int i=0;i<sizeof(g_wheelRPS);i++){
+	for (int i=0;i<(std::end(g_wheelRPS)-std::begin(g_wheelRPS));i++){
 		g_wheelRPS[i]=0.0;
 	}
 
@@ -51,7 +51,7 @@ int main (int argc, char **argv){
 	ros::param::param("~left_encoder", g_left_encoder, 1);
 	ros::param::param("~right_encoder", g_right_encoder, 2);
 
-	for (int i=0;i<sizeof(g_old_encoder);i++){
+	for (int i=0;i<(std::end(g_old_encoder)-std::begin(g_old_encoder));i++){
 		g_old_encoder[i]=0;
 		}
 
