@@ -5,20 +5,28 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "std_msgs/Float64MultiArray.h"
-#include <sstream>
 #include <rc/encoder_eqep.h>
-#include <bits/stdc++.h>
 
+#define CCW 1;
+#define CW -1;
+//global variables
 int g_left_encoder;      // param default 1
 int g_right_encoder;     // param default 2
 
-ros::Time g_old_timestamp;
-
+/*
+ * g_wheelRPS [4] - structure of the published topic
+ * 0th & 1st index -respective left and right wheel velocity (rps),
+ * 2nd & 3rd index -direction of rotation of left and right wheel respectively
+ */
 double g_wheelRPS[4];
-
 int g_old_encoder[2];
 
+ros::Time g_old_timestamp;
 
+/*
+ * Function to calculate the rotational speed in rps for individual wheels and direction of rotation.
+ * The rotational speed is updated in the global variable g_wheelRPS
+ */
 void calculateRPS(){
 
 	for (int i=0;i<(std::end(g_wheelRPS)-std::begin(g_wheelRPS));i++){
@@ -31,12 +39,20 @@ void calculateRPS(){
 	g_old_encoder[g_left_encoder-1] = rc_encoder_eqep_read(g_left_encoder);
 	g_old_encoder[g_right_encoder-1] = rc_encoder_eqep_read(g_right_encoder);
 
-	if(g_wheelRPS[g_left_encoder-1]>0.0){
-		g_wheelRPS[g_left_encoder+1]=1.0;
+	if(g_wheelRPS[g_left_encoder-1]<0.0){
+		g_wheelRPS[g_left_encoder+1]=CCW;
+		g_wheelRPS[g_left_encoder-1]=abs(g_wheelRPS[g_left_encoder-1]);
+	}
+	else{
+		g_wheelRPS[g_left_encoder+1]=CW;
 	}
 
-	if(g_wheelRPS[g_right_encoder-1]>0.0){
-			g_wheelRPS[g_right_encoder+1]=1.0;
+	if(g_wheelRPS[g_right_encoder-1]<0.0){
+			g_wheelRPS[g_right_encoder+1]=CCW;
+			g_wheelRPS[g_right_encoder-1]=abs(g_wheelRPS[g_right_encoder-1]);
+	}
+	else{
+		g_wheelRPS[g_right_encoder+1]=CW;
 	}
 
 	g_old_timestamp = ros::Time::now();
@@ -65,7 +81,7 @@ int main (int argc, char **argv){
 
 	ros::Publisher rps_pub = n.advertise <std_msgs::Float64MultiArray>("wheel_rps",100);
 
-	ros::Rate loop_rate(1);
+	ros::Rate loop_rate(1);	//Looping at a frequency of 1 Hz
 
 	while(ros::ok())
 	    {
