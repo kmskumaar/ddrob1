@@ -149,8 +149,10 @@ include_directories(
 # )
 
 add_executable(diff_motor_driver src/diff_motor_driver.cpp)
+add_executable(diff_motor_encoder src/diff_motor_encoder.cpp)
 add_executable(sample_talker src/sample_talker.cpp)
 target_link_libraries(diff_motor_driver ${catkin_LIBRARIES} robotcontrol)
+target_link_libraries(diff_motor_encoder ${catkin_LIBRARIES} robotcontrol)
 target_link_libraries(sample_talker ${catkin_LIBRARIES})
 #############
 ## Install ##
