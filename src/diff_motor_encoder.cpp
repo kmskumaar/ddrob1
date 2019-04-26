@@ -43,7 +43,7 @@ void calculateRPS(){
 		g_wheelRPS[g_left_encoder+1]=FWD;
 		g_wheelRPS[g_left_encoder-1]=fabs(g_wheelRPS[g_left_encoder-1]);
 	}
-	else{
+	else if (g_wheelRPS[g_left_encoder-1]>0.0){
 		g_wheelRPS[g_left_encoder+1]=BKD;
 	}
 
@@ -51,7 +51,7 @@ void calculateRPS(){
 			g_wheelRPS[g_right_encoder+1]=BKD;
 			g_wheelRPS[g_right_encoder-1]=fabs(g_wheelRPS[g_right_encoder-1]);
 	}
-	else{
+	else if(g_wheelRPS[g_right_encoder-1]>0.0){
 		g_wheelRPS[g_right_encoder+1]=FWD;
 	}
 
