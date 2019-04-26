@@ -7,8 +7,8 @@
 #include "std_msgs/Float64MultiArray.h"
 #include <rc/encoder_eqep.h>
 
-#define CCW 1;
-#define CW -1;
+#define FWD 1;
+#define BKD -1;
 //global variables
 int g_left_encoder;      // param default 1
 int g_right_encoder;     // param default 2
@@ -40,19 +40,19 @@ void calculateRPS(){
 	g_old_encoder[g_right_encoder-1] = rc_encoder_eqep_read(g_right_encoder);
 
 	if(g_wheelRPS[g_left_encoder-1]<0.0){
-		g_wheelRPS[g_left_encoder+1]=CCW;
-		g_wheelRPS[g_left_encoder-1]=abs(g_wheelRPS[g_left_encoder-1]);
+		g_wheelRPS[g_left_encoder+1]=FWD;
+		g_wheelRPS[g_left_encoder-1]=fabs(g_wheelRPS[g_left_encoder-1]);
 	}
 	else{
-		g_wheelRPS[g_left_encoder+1]=CW;
+		g_wheelRPS[g_left_encoder+1]=BKD;
 	}
 
 	if(g_wheelRPS[g_right_encoder-1]<0.0){
-			g_wheelRPS[g_right_encoder+1]=CCW;
-			g_wheelRPS[g_right_encoder-1]=abs(g_wheelRPS[g_right_encoder-1]);
+			g_wheelRPS[g_right_encoder+1]=BKD;
+			g_wheelRPS[g_right_encoder-1]=fabs(g_wheelRPS[g_right_encoder-1]);
 	}
 	else{
-		g_wheelRPS[g_right_encoder+1]=CW;
+		g_wheelRPS[g_right_encoder+1]=FWD;
 	}
 
 	g_old_timestamp = ros::Time::now();
