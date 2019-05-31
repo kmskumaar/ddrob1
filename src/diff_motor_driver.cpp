@@ -27,7 +27,7 @@ double g_duty_factor;  // param default 2.0
 int g_rate;
 
 
-void wheel_velCallback(const std_msgs::Float64MultiArrayConstPtr& vel_Array)
+void cmd_velCallback(const std_msgs::Float64MultiArrayConstPtr& vel_Array)
 {
     msg_received = ros::Time::now();
 
@@ -70,10 +70,13 @@ int main(int argc, char** argv)
 
     int sub_timeout;
 
-    ros::param::param("~timeout", sub_timeout, 5);
-    ros::param::param("~left_motor", g_left_motor, 1);
+   // ros::param::param("~timeout", sub_timeout, 5);
+    n.getParam("timeout",sub_timeout);
+    ROS_INFO("Timeout: %d",sub_timeout);
+    ros::param::param("~left_motor", g_left_motor);
     ros::param::param("~right_motor", g_right_motor, 2);
-    ros::param::param("~maxspeed", g_maxspeed, 0.4);
+    ros::param::param("~maxspeed", g_maxspeed);
+    ROS_INFO("Max Speed: %f",g_maxspeed);
     ros::param::param("~minspeed", g_minspeed, 0.1);
     ros::param::param("~duty_factor", g_duty_factor, 1.0);
     ros::param::param("~rate", g_rate, 10);
@@ -89,7 +92,7 @@ int main(int argc, char** argv)
     ROS_INFO("Initialize motor %d and %d with %d: OK", g_left_motor, g_right_motor, pwm_freq_hz);
 
 
-    ros::Subscriber sub = n.subscribe("wheel_vel",100,wheel_velCallback);
+    ros::Subscriber sub = n.subscribe("wheel_vel",100,cmd_velCallback);
 
     ROS_INFO("Node is up and Subsciber started");
 

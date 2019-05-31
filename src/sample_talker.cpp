@@ -14,11 +14,15 @@ int main (int argc, char **argv)
 
     ros::NodeHandle n;
 
-    float wheel_vel[] = {1.1,1.2};
+    double cmdspeed_left,cmdspeed_right;
+    ros::param::param("~cmdspeed_left", cmdspeed_left, 0.3);
+    ros::param::param("~cmdspeed_right", cmdspeed_right, 0.3);
+
+    double wheel_vel[2]={cmdspeed_left,cmdspeed_right};
 
     ROS_INFO("%f    %f ",wheel_vel[0],wheel_vel[1]);
 
-    ros::Publisher chatter_pub = n.advertise <std_msgs::Float64MultiArray>("wheel_vel",100);
+    ros::Publisher chatter_pub = n.advertise <std_msgs::Float64MultiArray>("cmd_vel",100);
 
     ros::Rate loop_rate(10);
 
