@@ -5,7 +5,7 @@
 #include "ros/ros.h"
 #include <vector>
 #include "std_msgs/String.h"
-#include "std_msgs/Float64MultiArray.h"
+#include "std_msgs/Float64.h"
 #include <geometry_msgs/Twist.h>
 
 
@@ -27,32 +27,37 @@ double g_duty_factor;  // param default 2.0
 int g_rate;
 
 
-void cmd_velCallback(const std_msgs::Float64MultiArrayConstPtr& vel_Array)
+void left_wheel_cmd_velCallback(const std_msgs::Float64Ptr& left_wheel_cmdvel)
 {
     msg_received = ros::Time::now();
 
-    double wheel_vel[90];
-    int i = 0;
-    for(std::vector<double>::const_iterator it = vel_Array->data.begin();it<=vel_Array->data.end();it++)
-    {
-        wheel_vel[i] = *it;
-        i++;
-    }
+    //ROS_INFO("Received left_wheel_cmdVel: [%f]", left_wheel_cmdvel->data);
 
-    ROS_INFO("Received wheel_Vel: [%f %f]", wheel_vel[0], wheel_vel[1]);
-
-    double velocity_left = wheel_vel[0];
-    double velocity_right = wheel_vel[1];
+    double velocity_left = left_wheel_cmdvel->data;
 
     // calculate duty cycle form velocity and duty factor
-    double duty_left = g_duty_factor * velocity_left;
-    double duty_right = g_duty_factor * velocity_right;
+    double duty_left_wheel = g_duty_factor * velocity_left;
 
-    ROS_INFO("set LEFT motor: velocity:%f duty:%f RIGHT motor: velocity:%f duty:%f", velocity_left, duty_left,
-             velocity_right, duty_right);
+    ROS_INFO("set LEFT motor: velocity:%f duty:%f", velocity_left, duty_left_wheel);
 
-    rc_motor_set(g_left_motor, duty_left);
-    rc_motor_set(g_right_motor, duty_right);
+    rc_motor_set(g_left_motor, duty_left_wheel);
+    g_driving = 1;
+}
+
+void right_wheel_cmd_velCallback(const std_msgs::Float64Ptr& right_wheel_cmdvel)
+{
+    msg_received = ros::Time::now();
+
+    //ROS_INFO("Received left_wheel_cmdVel: [%f]", left_wheel_cmdvel->data);
+
+    double velocity_right = right_wheel_cmdvel->data;
+
+    // calculate duty cycle form velocity and duty factor
+    double duty_right_wheel = g_duty_factor * velocity_right;
+
+    ROS_INFO("set RIGHT motor: velocity:%f duty:%f", velocity_right, duty_right_wheel);
+
+    rc_motor_set(g_right_motor, duty_right_wheel);
     g_driving = 1;
 
 }
@@ -70,8 +75,7 @@ int main(int argc, char** argv)
 
     int sub_timeout;
 
-   // ros::param::param("~timeout", sub_timeout, 5);
-    n.getParam("timeout",sub_timeout);
+    ros::param::param("~timeout", sub_timeout, 5);
     ROS_INFO("Timeout: %d",sub_timeout);
     ros::param::param("~left_motor", g_left_motor);
     ros::param::param("~right_motor", g_right_motor, 2);
@@ -92,9 +96,11 @@ int main(int argc, char** argv)
     ROS_INFO("Initialize motor %d and %d with %d: OK", g_left_motor, g_right_motor, pwm_freq_hz);
 
 
-    ros::Subscriber sub = n.subscribe("wheel_vel",100,cmd_velCallback);
+    ros::Subscriber left_wheel_cmdvel_sub = n.subscribe("/ddrob/left_wheel_cmdvel",100,left_wheel_cmd_velCallback);
+    ros::Subscriber right_wheel_cmdvel_sub = n.subscribe("/ddrob/right_wheel_cmdvel",100,right_wheel_cmd_velCallback);
 
-    ROS_INFO("Node is up and Subsciber started");
+
+    ROS_INFO("Node is up and Subscriber started");
 
     ros::Rate r(g_rate);
 
