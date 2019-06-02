@@ -5,7 +5,7 @@
 #include "ros/ros.h"
 #include <vector>
 #include "std_msgs/String.h"
-#include "std_msgs/Float64MultiArray.h"
+#include "std_msgs/Float64.h"
 #include <rc/encoder_eqep.h>
 
 #define FWD 1;
@@ -74,25 +74,23 @@ int main (int argc, char **argv){
 
 	ROS_INFO("Initialize motor encoders %d and %d: OK", g_left_encoder, g_right_encoder);
 
-	ros::Publisher rps_pub = n.advertise <std_msgs::Float64MultiArray>("wheel_vel",100);
+	ros::Publisher left_wheel_vel_pub = n.advertise <std_msgs::Float64>("ddrob/left_wheel_vel",100);
+	ros::Publisher right_wheel_vel_pub = n.advertise <std_msgs::Float64>("ddrob/right_wheel_vel",100);
 
 	ros::Rate loop_rate(g_loop_rate);	//Looping at a frequency of 1 Hz
 
 	while(ros::ok())
 	    {
 		calculateRPS();
-
+        std_msgs::Float64 left_wheel_vel, right_wheel_vel;
 		ROS_INFO("Left Wheel RPS: %f,     Right Wheel RPS: %f",g_wheelRPS[0],g_wheelRPS[1]);
-	        std_msgs::Float64MultiArray rps;
 
-	        rps.data.clear();
+            left_wheel_vel.data = g_wheelRPS[g_left_encoder-1];
+            right_wheel_vel.data = g_wheelRPS[g_right_encoder-1];
 
-	        for(int i=0;i<(sizeof(g_wheelRPS)/sizeof(*g_wheelRPS));i++)
-	        {
-	            rps.data.push_back(g_wheelRPS[i]);
-	        }
+	        left_wheel_vel_pub.publish(left_wheel_vel);
+	        right_wheel_vel_pub.publish(right_wheel_vel);
 
-	        rps_pub.publish(rps);
 	        ros::spinOnce();
 	        loop_rate.sleep();
 	    }
