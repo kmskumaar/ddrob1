@@ -7,12 +7,8 @@
 #include "std_msgs/String.h"
 #include "std_msgs/Float64.h"
 #include <geometry_msgs/Twist.h>
-
-
-#include <rc/motor.h>
-
+#include <rc/motor.h>       //motor driver library specific to beaglebone
 #include <nav_msgs/Odometry.h>
-//#include <ddrob/WheelVelocity.h>
 
 //global variables
 
@@ -76,13 +72,11 @@ int main(int argc, char** argv)
     int sub_timeout;
 
     ros::param::param("~timeout", sub_timeout, 5);
-    ROS_INFO("Timeout: %d",sub_timeout);
-    ros::param::param("~left_motor", g_left_motor);
-    ros::param::param("~right_motor", g_right_motor, 2);
+    ros::param::param("~left_motor", g_left_motor,1);
+    ros::param::param("~right_motor", g_right_motor,2);
     ros::param::param("~maxspeed", g_maxspeed);
-    ROS_INFO("Max Speed: %f",g_maxspeed);
     ros::param::param("~minspeed", g_minspeed, 0.1);
-    ros::param::param("~duty_factor", g_duty_factor, 1.0);
+    ros::param::param("~duty_factor", g_duty_factor, 0.042);    //duty factor denotes the linear relation between duty cycle and com_vel
     ros::param::param("~rate", g_rate, 10);
 
     int pwm_freq_hz = RC_MOTOR_DEFAULT_PWM_FREQ;  // 25000
@@ -118,7 +112,6 @@ int main(int argc, char** argv)
 
             g_driving = 0;
         }
-
         r.sleep();
     }
 

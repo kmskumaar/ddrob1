@@ -4,12 +4,12 @@
 
 #include "ros/ros.h"
 #include <vector>
+#include <cmath>
 #include "std_msgs/String.h"
 #include "std_msgs/Float64.h"
 #include <rc/encoder_eqep.h>
 
-#define FWD 1;
-#define BKD -1;
+#define RPS_TO_RAD  2*M_PI
 
 const int RPS=1;
 //global variables
@@ -28,7 +28,7 @@ int g_old_encoder[2];
 ros::Time g_old_timestamp;
 
 /*
- * Function to calculate the rotational speed in rps for individual wheels and direction of rotation.
+ * Function to calculate the rotational speed in RPS for individual wheels and direction of rotation.
  * The rotational speed is updated in the global variable g_wheelRPS
  */
 void calculateRPS(){
@@ -83,18 +83,18 @@ int main (int argc, char **argv){
 	    {
 		calculateRPS();
         std_msgs::Float64 left_wheel_vel, right_wheel_vel;
-		ROS_INFO("Left Wheel RPS: %f,     Right Wheel RPS: %f",g_wheelRPS[0],g_wheelRPS[1]);
 
-            left_wheel_vel.data = g_wheelRPS[g_left_encoder-1];
-            right_wheel_vel.data = g_wheelRPS[g_right_encoder-1];
+        ROS_INFO("Left Wheel rad/s: %f,     Right Wheel rad/s: %f",g_wheelRPS[0]*RPS_TO_RAD,g_wheelRPS[1]*RPS_TO_RAD);
 
-	        left_wheel_vel_pub.publish(left_wheel_vel);
-	        right_wheel_vel_pub.publish(right_wheel_vel);
+        //The speed is converted from RPS to rad/s before publishing it
+        left_wheel_vel.data = g_wheelRPS[g_left_encoder-1]*RPS_TO_RAD;
+        right_wheel_vel.data = g_wheelRPS[g_right_encoder-1]*RPS_TO_RAD;
 
-	        ros::spinOnce();
-	        loop_rate.sleep();
+        left_wheel_vel_pub.publish(left_wheel_vel);
+        right_wheel_vel_pub.publish(right_wheel_vel);
+
+        ros::spinOnce();
+        loop_rate.sleep();
 	    }
-
 	return 0;
-
 }

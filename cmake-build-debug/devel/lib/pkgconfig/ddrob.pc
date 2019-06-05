@@ -1,0 +1,8 @@
+prefix=/home/satheesh/ddrob/cmake-build-debug/devel
+
+Name: ddrob
+Description: Description of ddrob
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/satheesh/ddrob/cmake-build-debug/devel/lib 
+Requires: 
