@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_e7d5c/fast 
-/usr/bin/make -f CMakeFiles/cmTC_e7d5c.dir/build.make CMakeFiles/cmTC_e7d5c.dir/build
-make[1]: Entering directory '/home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e7d5c.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_e7d5c.dir/CheckSymbolExists.c.o   -c /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_e7d5c
-/home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e7d5c.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e7d5c.dir/CheckSymbolExists.c.o  -o cmTC_e7d5c 
-CMakeFiles/cmTC_e7d5c.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command(s):/usr/bin/make cmTC_f0d60/fast 
+/usr/bin/make -f CMakeFiles/cmTC_f0d60.dir/build.make CMakeFiles/cmTC_f0d60.dir/build
+make[1]: Entering directory '/home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f0d60.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_f0d60.dir/CheckSymbolExists.c.o   -c /home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_f0d60
+/home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f0d60.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_f0d60.dir/CheckSymbolExists.c.o  -o cmTC_f0d60 
+CMakeFiles/cmTC_f0d60.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x16): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e7d5c.dir/build.make:86: recipe for target 'cmTC_e7d5c' failed
-make[1]: *** [cmTC_e7d5c] Error 1
-make[1]: Leaving directory '/home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp'
-Makefile:121: recipe for target 'cmTC_e7d5c/fast' failed
-make: *** [cmTC_e7d5c/fast] Error 2
+CMakeFiles/cmTC_f0d60.dir/build.make:86: recipe for target 'cmTC_f0d60' failed
+make[1]: *** [cmTC_f0d60] Error 1
+make[1]: Leaving directory '/home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_f0d60/fast' failed
+make: *** [cmTC_f0d60/fast] Error 2
 
-File /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp
+Change Dir: /home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_0cdf3/fast 
-/usr/bin/make -f CMakeFiles/cmTC_0cdf3.dir/build.make CMakeFiles/cmTC_0cdf3.dir/build
-make[1]: Entering directory '/home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_0cdf3.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_0cdf3.dir/CheckFunctionExists.c.o   -c /home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/share/cmake-3.14/Modules/CheckFunctionExists.c
-Linking C executable cmTC_0cdf3
-/home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_0cdf3.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_0cdf3.dir/CheckFunctionExists.c.o  -o cmTC_0cdf3 -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_d68c5/fast 
+/usr/bin/make -f CMakeFiles/cmTC_d68c5.dir/build.make CMakeFiles/cmTC_d68c5.dir/build
+make[1]: Entering directory '/home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d68c5.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d68c5.dir/CheckFunctionExists.c.o   -c /home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/share/cmake-3.14/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d68c5
+/home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d68c5.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_d68c5.dir/CheckFunctionExists.c.o  -o cmTC_d68c5 -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_0cdf3.dir/build.make:86: recipe for target 'cmTC_0cdf3' failed
-make[1]: *** [cmTC_0cdf3] Error 1
-make[1]: Leaving directory '/home/satheesh/ddrob/cmake-build-debug/CMakeFiles/CMakeTmp'
-Makefile:121: recipe for target 'cmTC_0cdf3/fast' failed
-make: *** [cmTC_0cdf3/fast] Error 2
+CMakeFiles/cmTC_d68c5.dir/build.make:86: recipe for target 'cmTC_d68c5' failed
+make[1]: *** [cmTC_d68c5] Error 1
+make[1]: Leaving directory '/home/satheesh/GIT/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_d68c5/fast' failed
+make: *** [cmTC_d68c5/fast] Error 2
 
 

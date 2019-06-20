@@ -43,10 +43,10 @@ RM = /home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/satheesh/ddrob
+CMAKE_SOURCE_DIR = /home/satheesh/GIT
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/satheesh/ddrob/cmake-build-debug
+CMAKE_BINARY_DIR = /home/satheesh/GIT/cmake-build-debug
 
 # Utility rule file for clean_test_results.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /home/satheesh/ddrob/cmake-build-debug
 include CMakeFiles/clean_test_results.dir/progress.make
 
 CMakeFiles/clean_test_results:
-	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/satheesh/ddrob/cmake-build-debug/test_results
+	/usr/bin/python /opt/ros/kinetic/share/catkin/cmake/test/remove_test_results.py /home/satheesh/GIT/cmake-build-debug/test_results
 
 clean_test_results: CMakeFiles/clean_test_results
 clean_test_results: CMakeFiles/clean_test_results.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/clean_test_results.dir/clean:
 .PHONY : CMakeFiles/clean_test_results.dir/clean
 
 CMakeFiles/clean_test_results.dir/depend:
-	cd /home/satheesh/ddrob/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/satheesh/ddrob /home/satheesh/ddrob /home/satheesh/ddrob/cmake-build-debug /home/satheesh/ddrob/cmake-build-debug /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/satheesh/GIT/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/satheesh/GIT /home/satheesh/GIT /home/satheesh/GIT/cmake-build-debug /home/satheesh/GIT/cmake-build-debug /home/satheesh/GIT/cmake-build-debug/CMakeFiles/clean_test_results.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/clean_test_results.dir/depend
 

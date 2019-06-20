@@ -67,8 +67,8 @@ set(ddrob_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(ddrob_SOURCE_PREFIX /home/satheesh/ddrob)
-  set(ddrob_DEVEL_PREFIX /home/satheesh/ddrob/cmake-build-debug/devel)
+  set(ddrob_SOURCE_PREFIX /home/satheesh/GIT)
+  set(ddrob_DEVEL_PREFIX /home/satheesh/GIT/cmake-build-debug/devel)
   set(ddrob_INSTALL_PREFIX "")
   set(ddrob_PREFIX ${ddrob_DEVEL_PREFIX})
 else()

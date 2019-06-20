@@ -48,10 +48,10 @@ RM = /home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/satheesh/ddrob
+CMAKE_SOURCE_DIR = /home/satheesh/GIT
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/satheesh/ddrob/cmake-build-debug
+CMAKE_BINARY_DIR = /home/satheesh/GIT/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,9 +137,9 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/satheesh/ddrob/cmake-build-debug/CMakeFiles /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/satheesh/GIT/cmake-build-debug/CMakeFiles /home/satheesh/GIT/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/satheesh/ddrob/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/satheesh/GIT/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/satheesh/ddrob/src/sample_talker.cpp" "/home/satheesh/ddrob/cmake-build-debug/CMakeFiles/sample_talker.dir/src/sample_talker.cpp.o"
+  "/home/satheesh/GIT/src/sample_talker.cpp" "/home/satheesh/GIT/cmake-build-debug/CMakeFiles/sample_talker.dir/src/sample_talker.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

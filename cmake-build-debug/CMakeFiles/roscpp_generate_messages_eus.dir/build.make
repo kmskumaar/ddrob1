@@ -43,10 +43,10 @@ RM = /home/satheesh/Downloads/clion-2019.1.4/bin/cmake/linux/bin/cmake -E remove
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/satheesh/ddrob
+CMAKE_SOURCE_DIR = /home/satheesh/GIT
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/satheesh/ddrob/cmake-build-debug
+CMAKE_BINARY_DIR = /home/satheesh/GIT/cmake-build-debug
 
 # Utility rule file for roscpp_generate_messages_eus.
 
@@ -67,6 +67,6 @@ CMakeFiles/roscpp_generate_messages_eus.dir/clean:
 .PHONY : CMakeFiles/roscpp_generate_messages_eus.dir/clean
 
 CMakeFiles/roscpp_generate_messages_eus.dir/depend:
-	cd /home/satheesh/ddrob/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/satheesh/ddrob /home/satheesh/ddrob /home/satheesh/ddrob/cmake-build-debug /home/satheesh/ddrob/cmake-build-debug /home/satheesh/ddrob/cmake-build-debug/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/satheesh/GIT/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/satheesh/GIT /home/satheesh/GIT /home/satheesh/GIT/cmake-build-debug /home/satheesh/GIT/cmake-build-debug /home/satheesh/GIT/cmake-build-debug/CMakeFiles/roscpp_generate_messages_eus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/roscpp_generate_messages_eus.dir/depend
 
