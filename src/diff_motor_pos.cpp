@@ -2,6 +2,7 @@
 #include "std_msgs/String.h"
 #include "std_msgs/Float64.h"
 #include <rc/encoder_eqep.h>
+#include <cmath>
 
 //global variables
 int g_left_encoder;      // param default 1
@@ -32,10 +33,13 @@ int main (int argc, char **argv){
 
     while(ros::ok())
     {
-        ROS_INFO("Left Wheel Pos: %f,     Right Wheel Pos: %f",g_wheelRPS[0]*RPS_TO_RAD,g_wheelRPS[1]*RPS_TO_RAD);
+        ROS_INFO("Left Wheel Pos: %d,     Right Wheel Pos: %d",rc_encoder_eqep_read(g_left_encoder),rc_encoder_eqep_read(g_right_encoder));
 
-        left_wheel_pos_pub.publish(rc_encoder_eqep_read(g_left_encoder));
-        right_wheel_pos_pub.publish(rc_encoder_eqep_read(g_right_encoder));
+	std_msgs::Float64 left_wheel_pos, right_wheel_pos;
+	left_wheel_pos.data = rc_encoder_eqep_read(g_left_encoder)*(2*M_PI/12);
+	right_wheel_pos.data = rc_encoder_eqep_read(g_right_encoder)*(2*M_PI/12);
+        left_wheel_pos_pub.publish(left_wheel_pos);
+        right_wheel_pos_pub.publish(right_wheel_pos);
 
         ros::spinOnce();
         loop_rate.sleep();
