@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="timeout" default="5" />
+  <!--arg name="timeout" default="5" />
   <arg name="left_motor" default="1" />
   <arg name="right_motor" default="2" />
   <arg name="left_encoder" default="1" />
@@ -29,16 +29,13 @@
     <param name="KD_Gain" value="$(arg KD_Gain)" />
     <param name="KI_Gain" value="$(arg KI_Gain)" />
   </node>
-
+-->
   <node name="diff_motor_encoder" pkg="ddrob" type="diff_motor_encoder" respawn="true">
     <param name="left_encoder" value="$(arg left_encoder)" />
     <param name="right_encoder" value="$(arg right_encoder)" />
     <param name="encoder_counts" value="$(arg encoder_counts)" />
     <param name="encoder_loop_rate" value="$(arg encoder_loop_rate)" />
   </node>
-  
-  <node name="sample_talker" pkg="ddrob" type="sample_talker" respawn="true">
-    <param name="cmdspeed_left" value="$(arg cmdspeed_left)" />
-    <param name="cmdspeed_right" value="$(arg cmdspeed_right)" />
+  <node name="diff_motor_driver" pkg="ddrob" type="diff_motor_driver" respawn="true">
   </node>
 </launch>
